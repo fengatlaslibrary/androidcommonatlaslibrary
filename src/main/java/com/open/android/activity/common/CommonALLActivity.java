@@ -88,7 +88,7 @@ public class CommonALLActivity extends CommonFragmentActivity implements OnItemC
 			CommonAllBean allBean;
 			for (ActivityInfo info : activities) {
 				if (!CommonALLActivity.class.getName().equals(info.name)) {
-					allBean = new CommonAllBean(info.name, info.name);
+					allBean = new CommonAllBean(info.name, getResources().getString(info.descriptionRes));
 					list.add(allBean);
 				}
 			}
