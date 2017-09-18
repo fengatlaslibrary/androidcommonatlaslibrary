@@ -53,10 +53,14 @@ public class ImageAsyncTask extends AsyncTask<Bitmap, Void, String> {
         String result = mContext.getResources().getString(R.string.save_picture_failed);
         try {  
             String sdcard = Environment.getExternalStorageDirectory().toString();
-            File file = new File(sdcard + "/"+mContext.getPackageName()+"/");
+            File file = new File(sdcard + "/");
             if (!file.exists()) {  
                 file.mkdirs();  
-            }  
+            }
+            file = new File(sdcard + "/"+mContext.getPackageName()+"/");
+            if (!file.exists()) {
+                file.mkdirs();
+            }
             //http://i1.umei.cc/uploads/tu/201609/33/mimn5ha5dfo.jpg
             File imageFile = new File(file.getAbsolutePath(),  URLEncoder.encode(srcUrl.replace(".jpg", ""),"UTF-8")+".jpg");
             imageFile.deleteOnExit();
