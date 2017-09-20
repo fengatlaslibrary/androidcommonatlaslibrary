@@ -46,7 +46,7 @@ public class CommonAllClassAdapter extends CommonAdapter<CommonAllBean> {
 		View view;
 		view = LayoutInflater.from(mContext).inflate(R.layout.adapter_common_all_class, null);
 		TextView text_name = (TextView) view.findViewById(R.id.text_name);
-		text_name.setText(bean.getFunctionDesp());
+		text_name.setText(bean.getClassName());
 		return view;
 	}
 
