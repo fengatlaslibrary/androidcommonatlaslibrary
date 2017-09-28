@@ -30,6 +30,8 @@ import android.webkit.WebViewClient;
 
 import com.open.android.R;
 import com.open.android.activity.CommonFragmentActivity;
+import com.open.android.bean.db.OpenDBBean;
+import com.open.android.db.service.OpenDBService;
 import com.open.android.utils.DownLoadAsyncTask;
 
 
@@ -98,6 +100,17 @@ public class CommonWebViewActivity extends CommonFragmentActivity {
 		                   @Override
 		                   public void onClick(DialogInterface dialog, int which) {
 		                       new DownLoadAsyncTask(CommonWebViewActivity.this,imgurl).execute();
+							   try {
+								   //数据存储
+								   OpenDBBean openbean = new OpenDBBean();
+								   openbean.setUrl(imgurl);
+								   openbean.setTypename("1");
+								   openbean.setTitle("");
+								   openbean.setType(1);
+								   OpenDBService.insert(CommonWebViewActivity.this, openbean);
+							   } catch (Exception e) {
+								   e.printStackTrace();
+							   }
 		                   }  
 		               });  
 		               builder.show();  
