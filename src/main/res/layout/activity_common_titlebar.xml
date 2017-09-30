@@ -7,12 +7,15 @@
     android:clipChildren="false"
     android:clipToPadding="false"
     android:fitsSystemWindows="true"
+    android:id="@+id/layout_root"
      >
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="45dp"
-        android:background="#333" >
+        android:background="#333"
+        android:id="@+id/layout_titlebar"
+        >
 		<TextView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
