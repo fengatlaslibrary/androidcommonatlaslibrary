@@ -28,6 +28,7 @@ import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.baidu.mobstat.StatService;
 import com.open.android.R;
 import com.open.android.activity.CommonFragmentActivity;
 import com.open.android.bean.db.OpenDBBean;
@@ -101,6 +102,7 @@ public class CommonWebViewActivity extends CommonFragmentActivity {
 		                   public void onClick(DialogInterface dialog, int which) {
 		                       new DownLoadAsyncTask(CommonWebViewActivity.this,imgurl).execute();
 							   try {
+								   StatService.onEvent(CommonWebViewActivity.this, "10001", "保存图片", 1);
 								   //数据存储
 								   OpenDBBean openbean = new OpenDBBean();
 								   openbean.setUrl(imgurl);
@@ -129,6 +131,7 @@ public class CommonWebViewActivity extends CommonFragmentActivity {
 	 * @see com.example.newsinfo.CommonActivity#initValue()
 	 */
 	protected void initValue() {
+		StatService.bindJSInterface(this, webview);
 		// TODO Auto-generated method stub
 		WebSettings webSettings = webview.getSettings();
 		webSettings.setJavaScriptEnabled(true);

@@ -2,18 +2,14 @@ package com.open.android.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-//import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
-//import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-//import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
+import com.baidu.mobstat.StatService;
 import com.open.andenginetask.AsyncTaskUtils;
 import com.open.andenginetask.CallEarliest;
 import com.open.andenginetask.Callable;
@@ -24,10 +20,11 @@ import com.open.android.weak.WeakAppReferenceHandler;
 
 import org.json.JSONObject;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
+
+//import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+//import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+//import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 /**
  * 
@@ -334,6 +331,21 @@ public class BaseAppFragment<T,F extends BaseAppFragment> extends Fragment imple
 	
 	public void initValues() {
 
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		StatService.onResume(this);
+		StatService.onPageStart(getActivity(), getClass().getName());
+	}
+
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		StatService.onPause(this);
+		StatService.onPageEnd(getActivity(), getClass().getName());
 	}
 
 }

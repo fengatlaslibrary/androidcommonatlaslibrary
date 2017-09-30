@@ -28,4 +28,5 @@ dependencies {
     compile project(':andenginetasklibrary')
     compile project(':androidvolleylibrary')
     compile project(':androidpulltorefreshlibrary')
+    compile 'com.baidu.mobstat:mtj-sdk:latest.integration'
 }

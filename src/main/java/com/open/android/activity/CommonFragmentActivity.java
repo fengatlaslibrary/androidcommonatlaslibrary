@@ -97,4 +97,6 @@ public class CommonFragmentActivity<T> extends BaseFragmentActivity<T> {
 		
 	}
 
+
+
 }

@@ -6,9 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.baidu.mobstat.StatService;
 import com.open.android.mvp.presenter.CommonPresenter;
 import com.open.android.mvp.view.CommonView;
-import com.open.android.weak.WeakReferenceMVPHandler;
 import com.open.android.weak.WeakReferenceMVPPHandler;
 
 /**
@@ -164,4 +164,18 @@ public class BaseV4MVPPFragment<T,F extends BaseV4MVPPFragment,P extends CommonP
 		
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		StatService.onResume(this);
+		StatService.onPageStart(getActivity(), getClass().getName());
+	}
+
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		StatService.onPause(this);
+		StatService.onPageEnd(getActivity(), getClass().getName());
+	}
 }

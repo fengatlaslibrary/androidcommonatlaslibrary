@@ -13,17 +13,16 @@ package com.open.android.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.baidu.mobstat.StatService;
 import com.open.andenginetask.AsyncTaskUtils;
 import com.open.andenginetask.CallEarliest;
 import com.open.andenginetask.Callable;
@@ -34,9 +33,6 @@ import com.open.android.weak.WeakAppCompatActivityReferenceHandler;
 
 import org.json.JSONObject;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -305,5 +301,20 @@ Response.Listener<JSONObject>, Response.ErrorListener {
 	 */
 	public void handlerMessage(Message msg) {
 		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		StatService.onResume(this);
+		StatService.onPageStart(this, getClass().getName());
+	}
+
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		StatService.onPause(this);
+		StatService.onPageEnd(this, getClass().getName());
 	}
 }

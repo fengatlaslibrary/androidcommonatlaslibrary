@@ -1,16 +1,15 @@
 package com.open.android.fragment;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.baidu.mobstat.StatService;
 import com.open.andenginetask.AsyncTaskUtils;
 import com.open.andenginetask.CallEarliest;
 import com.open.andenginetask.Callable;
@@ -21,9 +20,6 @@ import com.open.android.weak.WeakReferenceHandler;
 
 import org.json.JSONObject;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -338,6 +334,21 @@ public class BaseV4Fragment<T,F extends BaseV4Fragment> extends Fragment impleme
 	
 	public void initValues() {
 
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		StatService.onResume(this);
+		StatService.onPageStart(getActivity(), getClass().getName());
+	}
+
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		StatService.onPause(this);
+		StatService.onPageEnd(getActivity(), getClass().getName());
 	}
 
 }

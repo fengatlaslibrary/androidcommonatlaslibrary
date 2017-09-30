@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.baidu.mobstat.StatService;
 import com.open.android.weak.WeakReferenceMVPHandler;
 
 /**
@@ -142,4 +143,18 @@ public class BaseV4MVPFragment<T,F extends BaseV4MVPFragment> extends Fragment {
 
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		StatService.onResume(this);
+		StatService.onPageStart(getActivity(), getClass().getName());
+	}
+
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		StatService.onPause(this);
+		StatService.onPageEnd(getActivity(), getClass().getName());
+	}
 }
