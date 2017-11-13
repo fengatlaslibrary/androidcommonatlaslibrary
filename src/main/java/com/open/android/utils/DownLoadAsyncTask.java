@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 
 
@@ -64,8 +65,23 @@ public class DownLoadAsyncTask extends AsyncTask<Void, Void, String> {
             outStream = new FileOutputStream(imageFile);
             
             URL picUrl = new URL(srcUrl);
+            URLConnection connection = picUrl.openConnection();
+
+            if(picUrl.toString().contains("img.mmjpg.com")){
+                connection.setRequestProperty("Referer", "http://m.mmjpg.com/mm/1033/1");
+                connection.setRequestProperty("Host", "img.mmjpg.com");
+                connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36");
+            }else if(picUrl.toString().contains("img.1985t.com")){
+//        			connection.setRequestProperty("Referer", "http://m.mmjpg.com/mm/1033/1");
+//        			connection.setRequestProperty("Host", "img.mmjpg.com");
+                connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
+            }else if(picUrl.toString().contains("http://m.mm131.com/")){
+                connection.setRequestProperty("Referer", "http://m.mzitu.com/96554");
+                connection.setRequestProperty("Host", "img1.mm131.me");
+            }
+            InputStream is = connection.getInputStream();
             //通过图片的链接打开输入流  
-            InputStream is = picUrl.openStream();
+//            InputStream is  = picUrl.openStream();
             if(is==null){  
                 return null;  
             }  
